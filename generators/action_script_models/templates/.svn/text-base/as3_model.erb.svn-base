@@ -1,0 +1,11 @@
+package <%= as3_class.package %>
+{
+	import <%= "#{as3_class.base_package}.#{as3_class.name}Base" %>
+	
+	<%= RubyAMF::Configuration::ClassMappings.assume_types ? "[RemoteClass(alias='#{as3_class.ruby_class.to_s}')]" : '' %>
+	[Bindable]
+	public class <%= as3_class.name %> extends <%= as3_class.name %>Base
+	{
+		
+	}
+}

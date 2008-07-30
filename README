@@ -1,0 +1,62 @@
+RubyAMF::Quickly
+================
+
+The RubyAMF::Quickly plugin is intended to jump start any Flex on Rails project using RubyAMF.  
+
+NOTE:	The RubyAMF::Quickly plugin installation appends it's own configuration settings to the config/rubyamf_config.rb file.
+	The plugin's configuration defaults it's settings for the most natural Rails and Flex development as well as overrides some of the 
+	default RubyAMF settings.  All examples and following explanation are given using the RubyAMF::Quickly default configuration.
+
+RubyAMF::Quickly provides the following:
+
+	1.	ActionScript Model Generator
+		============================
+		The action_script_models generator creates ActionScript models from the project's ActiveRecord models.
+		
+		Given a Rails project with a single ActiveRecord model, Person.rb the following will be created from running
+		./script/generate action_script_models com.example.models
+		
+		RAILS_ROOT/app/flex/com/example/models/Person.as		=> Generated once. Add custom ActionScript model behavior here. Subclasses PersonBase.as
+		RAILS_ROOT/app/flex/com/example/models/base/PersonBase.as	=> Generated every time. Contains properties and toParams() method
+		RAILS_ROOT/app/flex/com/example/models/helpers/Errors.as	=> ActionScript implementation of the ActiveRecord Errors class
+		RAILS_ROOT/app/flex/com/example/models/helpers/Hash.as		=> ActionScript dynamic class with some Ruby Hash-like methods
+		RAILS_ROOT/app/flex/com/example/models/helpers/RubyAMF.as	=> Simple remoting helper for Rails controller/action invocation
+		
+	2.	Runtime Assistance
+		==================
+		By default, RubyAMF::Quickly adds a couple of helpers to the RubyAMF request cycle.
+				
+		- Parameter Filtering - This before_filter merges any remoting request parameters into the standard controller params hash.
+		- Default Exception Handling -	Using the Rails 2 rescue_from method, any unhandled Exceptions will be converted to a RubyAMF
+						FaultObject that will trigger an ActionScript FaultEvent.
+		
+
+Quickly Concepts
+================
+
+The main idea behind RubyAMF::Quickly is to keep with the simplicity of Rails RESTful theme while maintaining a natural Flex development environment.  The core RubyAMF project allows bidirectional object graph messaging.  This method works, but is not conducive to reuse of existing Rails controller logic without "cluttering" things up with is_amf conditional logic. Again... this works, but is not the Rails way.  
+
+RubyAMF::Quickly encourages a slightly different approach:  Send HTTP hash-like requests from Flex.  Let Rails respond to AMF requests with ActiveRecord object graphs.
+
+
+Example
+=======
+
+Given a Person.rb ActiveRecord class, a PeopleController#create Rails controller/action, and the generated ActionScript classes as described above, the following ActionScript code will save a Person to the database.
+
+	var myPerson:Person = new Person();
+	myPerson.name = 'Foo';
+	myPerson.favoriteNumber = 7;
+	
+	RubyAMF.call('PeopleController', 'create', {person: myPerson.toParams()}, myPersonResultHandler, myPersonFaultHandler);
+	
+This example uses the generated Person.as ActionScript class that corresponds to the ActiveRecord Person.rb with two database attributes: name and favorite_number.  The RubyAMF.call() method streamlines the definition and "caching" of Flex RemoteObjects.  The first parameter is the class name of the Rails controller we're targeting.  The second parameter is the controller action to invoke.  The third parameter is an anonymous object that serves as the hash-like "wrapper" that the parameters will be sent in.  This is the equivalent of a standard HTML form input names of person[name] and person[favorite_number].  You'll want to note the use of myPerson.toParams() when constructing the request "hash."  toParams() is defined on the generated PersonBase.as class that returns another anonymous object with the corresponding attributes and values.  The request "hash" could have also been defined without using the toParams() method as {person: {name: 'foo', favoriteNumber: 7}}, but the toParams() method provides additional functionality.  toParams() also accepts an array of properties to exclude.  For example, {person: myPerson.toParams('name')} would not include the name property and value in the request.
+
+
+More Documentation
+==================
+
+The RubyAMF::Quickly::Config section that was appended to rubyamf_config.rb file has more documentation for configuration options supported by RubyAMF::Quickly.
+
+
+Copyright (c) 2008 Luke Pillow, released under the MIT license

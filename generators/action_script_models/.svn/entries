@@ -1,0 +1,44 @@
+8
+
+dir
+111
+http://www.treetrunkmedia.com/svn/plugins/rubyamf_quickly/generators/action_script_models
+http://www.treetrunkmedia.com/svn
+
+
+
+2008-07-02T16:04:28.464873Z
+111
+lpillow
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+975abe41-da3c-0410-88f3-9b76e4b188a3
+
+action_script_models_generator.rb
+file
+
+
+
+
+2008-07-30T17:47:08.000000Z
+ff3176acb15c87929d2f65c86ad2883a
+2008-07-02T16:04:28.464873Z
+111
+lpillow
+has-props
+
+templates
+dir
+

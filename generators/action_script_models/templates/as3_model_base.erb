@@ -1,0 +1,41 @@
+/*
+* WARNING:  DO NOT MODIFY THIS GENERATED CLASS. ANY CHANGES WILL BE LOST.
+*           ADD CUSTOM MODIFICATIONS TO <%= as3_class.name %>.as  
+*/
+package <%= as3_class.base_package %>
+{
+	<% if use_helpers %>
+	import <%= "#{helper_package}.Hash;" %>
+	import <%= "#{helper_package}.Errors;" %>
+	<% end %>
+	[Bindable]
+	public class <%= as3_class.name %>Base extends Base
+	{
+	  	<% as3_class.properties.each {|property| %>private var _<%= property.name %>:<%= property.static_type %>;
+	  	<% } %>
+		<%= 'public var errors:Errors = new Errors;' if use_helpers %>
+		<% params_class = use_helpers ? 'Hash' : 'Object' %>
+		/**
+		 * Create <%= use_helpers ? "a #{params_class}" : "an #{params_class}" %> representing this object's persistent properties.
+		 * <% if use_helpers %>@param ...exclude any String property names that should not be included in the Hash<% end %>
+		 */
+		public function toParams(<%= '...exclude' if use_helpers %>):<%= params_class %> {
+			var params:<%= params_class %> = new <%= params_class %>();
+			<% as3_class.properties.each do |property| %>
+			params['<%= property.name %>'] = this.<%= property.accessor %>;<% end %>
+			
+			return params<%= '.remove(exclude)' if use_helpers %>;
+		}
+		
+		<% as3_class.properties.each do |property| %>
+		// ACCESSORS: <%= property.name %>
+		public function get <%= property.accessor %>():<%= property.static_type %> {
+			return this._<%= property.name %>;
+		}
+		
+		public function set <%= property.accessor %>(value:<%= property.static_type %>):void {
+			this._<%= property.name %> = value;
+		}
+		<% end %>
+	}
+}

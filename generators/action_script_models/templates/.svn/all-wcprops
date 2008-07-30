@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/110/plugins/rubyamf_quickly/generators/action_script_models/templates
+END
+as3_helper_hash.erb
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/!svn/ver/79/plugins/rubyamf_quickly/generators/action_script_models/templates/as3_helper_hash.erb
+END
+as3_helper_rubyamf.erb
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/!svn/ver/32/plugins/rubyamf_quickly/generators/action_script_models/templates/as3_helper_rubyamf.erb
+END
+as3_base.erb
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/!svn/ver/108/plugins/rubyamf_quickly/generators/action_script_models/templates/as3_base.erb
+END
+as3_model_base.erb
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/!svn/ver/110/plugins/rubyamf_quickly/generators/action_script_models/templates/as3_model_base.erb
+END
+as3_helper_errors.erb
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/!svn/ver/75/plugins/rubyamf_quickly/generators/action_script_models/templates/as3_helper_errors.erb
+END
+as3_model.erb
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/!svn/ver/73/plugins/rubyamf_quickly/generators/action_script_models/templates/as3_model.erb
+END
