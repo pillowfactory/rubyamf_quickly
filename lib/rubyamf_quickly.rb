@@ -8,12 +8,10 @@ module RubyAMF
       mattr_accessor :relative_flex_root
       mattr_accessor :action_script_package
       mattr_accessor :ignore_classes
-      mattr_accessor :prefix_booleans
       
       @@relative_flex_root = 'app/flex'
       @@action_script_package = nil
       @@ignore_classes = []
-      @@prefix_booleans = true
 
       # RUNTIME
       mattr_accessor :convert_unhandled_exceptions

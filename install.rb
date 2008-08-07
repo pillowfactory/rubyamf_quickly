@@ -39,10 +39,6 @@ begin
     
   #=> What, if any ActiveRecord models should NOT have corresponding ActionScript classes generated?
   # RubyAMF::Quickly::Config.ignore_classes = [ 'Person', 'User', 'Address' ]
-  
-  #=> Prefix ActionScript boolean types with 'is'? 
-  # Defaults to true so generated ActionScript classes will follow ActionScript coding style.
-  # RubyAMF::Quickly::Config.prefix_booleans = true
 
   # => CONTROLLERS; THE BEFORE AND AFTER
   

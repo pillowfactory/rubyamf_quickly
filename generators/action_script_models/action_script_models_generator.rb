@@ -110,7 +110,7 @@ module RubyAMF::Quickly
     def initialize( ar_column )
       self.name = (RubyAMF::Configuration::ClassMappings.translate_case ? ar_column.name.dup.to_camel! : ar_column.name.dup)
       self.static_type = TypeConverter.convert(ar_column)
-      self.accessor = (self.static_type == 'Boolean' && RubyAMF::Quickly::Config.prefix_booleans ? "is#{self.name.capitalize}" : self.name)
+      self.accessor = self.name
     end
 
   end
