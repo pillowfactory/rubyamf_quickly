@@ -9,7 +9,7 @@ module RubyAMF
       mattr_accessor :action_script_package
       mattr_accessor :ignore_classes
       
-      @@relative_flex_root = 'app/flex'
+      @@relative_flex_root = 'app/flex/src'
       @@action_script_package = nil
       @@ignore_classes = []
 
