@@ -29,7 +29,7 @@ begin
 
   #=> Where do you want to generate ActionScript classes?  
   # Defaults to Peter Armstrong's suggested RAILS_ROOT/app/flex
-  # RubyAMF::Quickly::Config.relative_flex_root = 'app/flex'
+  # RubyAMF::Quickly::Config.relative_flex_root = 'app/flex/src'
   
   #=> What package should your generated ActionScript classes belong to?  
   # Defaults to no package so all ActionScript classes will be generated to RubyAMF::Quickly.relative_flex_root
