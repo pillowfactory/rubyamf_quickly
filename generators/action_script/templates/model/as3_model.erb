@@ -1,0 +1,15 @@
+package <%= as3_class.package %>
+{
+	import <%= "#{as3_superclass_package}.#{as3_superclass_name};" %>
+	
+	<%= RubyAMF::Configuration::ClassMappings.assume_types ? "[RemoteClass(alias='#{as3_class.ruby_class.to_s}')]" : '' %>
+	[Bindable]
+	public class <%= as3_class.name %> extends <%= as3_superclass_name %>
+	{
+		
+      public override function clone():<%= as3_class.name %> {
+  		  return super.clone() as <%= as3_class.name %>;
+      }
+		
+	}
+}

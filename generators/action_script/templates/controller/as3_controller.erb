@@ -1,0 +1,9 @@
+package <%= as3_class.package %>
+{
+	import <%= "#{[as3_class.package,'base', "#{as3_class.name}Base"].join('.')};" %>
+
+	public class <%= as3_class.name %> extends <%= as3_class.name %>Base
+	{
+	    public function <%= as3_class.name %>() { /* do nothing */ }	  
+	}
+}

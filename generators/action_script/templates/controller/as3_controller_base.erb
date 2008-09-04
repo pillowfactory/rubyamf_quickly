@@ -1,0 +1,22 @@
+/*
+* WARNING:  DO NOT MODIFY THIS GENERATED CLASS. ANY CHANGES WILL BE LOST.
+*           ADD CUSTOM MODIFICATIONS TO <%= as3_class.name %>.as  
+*/
+package <%= as3_class.base_package %>
+{
+	import <%= "#{[base_class_package,'base.RemoteBase'].join('.')};" %>
+
+	public class <%= as3_class.name %>Base extends RemoteBase
+	{
+	    public function <%= as3_class.name %>Base() { /* do nothing */ }
+	  
+	    protected override function get remoteController():String {
+	      return '<%= as3_class.ruby_class.to_s %>';
+	    }
+	    <% as3_class.actions.each do |action| %>
+	    public function call<%= "#{method=action.dup.to_camel!; method[0..0].upcase!}#{method[1..-1]}" %>(params:Object, resultHandler:Function, faultHandler:Function):void {
+	      call('<%= action %>', params, resultHandler, faultHandler);
+	    }
+	    <% end %>
+	}
+}

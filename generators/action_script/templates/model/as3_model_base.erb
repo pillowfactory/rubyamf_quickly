@@ -1,0 +1,65 @@
+/*
+* WARNING:  DO NOT MODIFY THIS GENERATED CLASS. ANY CHANGES WILL BE LOST.
+*           ADD CUSTOM MODIFICATIONS TO <%= as3_class.name %>.as  
+*/
+package <%= as3_class.base_package %>
+{
+	import <%= "#{[base_class_package,'base.Base'].join('.')};" %>
+	import <%= "#{as3_class.package}.#{as3_class.name};" %>
+	import <%= "#{helper_package}.Hash;" %>
+	
+	[Bindable]
+	public class <%= as3_class.name %>Base extends Base
+	{
+	  	<% as3_class.properties.each {|property| %>private var _<%= property.name %>:<%= property.static_type %><%= ['lock_version',"lockVersion"].include?( property.name ) ? ' = 0' : '' %>;
+	  	<% } %>
+
+		/**
+		 * Create a Hash representing this object's persistent properties.
+		 * @param ...exclude any String property names that should not be included in the Hash
+		 */
+		public function toParams(...exclude):Hash {
+			var params:Hash = new Hash();
+			<% as3_class.properties.each do |property| %>
+			params['<%= property.name %>'] = this.<%= property.accessor %>;<% end %>
+			
+			return params.remove(exclude);
+		}
+		
+		/**
+		 * Create a new, duplicate instance of this <%= as3_class.name.downcase %>; copying all properties to the new instance by reference.
+		 */
+		public function clone():<%= as3_class.base_name %> {
+			var cloned:<%= as3_class.base_name %> = new (getDefinitionByName(getQualifiedClassName(this) as <%= as3_class.base_name %>);
+			<% as3_class.properties.each do |property| unless property.accessor.eql? 'id' %>
+			cloned.<%= property.accessor %> = this.<%= property.accessor %>;<% end end %>
+
+			return cloned;
+		}
+		
+		/**
+		 * Test this <%= as3_class.name.downcase %>'s property values against another object determine equality
+		 */
+		public function equal( obj:Object ):Boolean {
+			return obj != null && obj is <%= as3_class.base_name %> <% as3_class.properties.each do |property| unless property.accessor.eql? 'id' %>
+					&& obj.<%= property.accessor %> == this.<%= property.accessor %><% end end %>;
+		}
+		
+		/**
+		 * Assign the values of another <%= as3_class.name.downcase %> to this <%= as3_class.name.downcase %>.
+		 */
+		public function merge( obj:<%= as3_class.base_name %> ):void { <% as3_class.properties.each do |property| unless property.accessor.eql? 'id'%>
+			this.<%= property.accessor %> = obj.<%= property.accessor %>;<% end end %>
+		}
+		<% as3_class.properties.each do |property| %>
+		// ACCESSORS: <%= property.name %>
+		public function get <%= property.accessor %>():<%= property.static_type %> {
+			return this._<%= property.name %>;
+		}
+		
+		public function set <%= property.accessor %>(value:<%= property.static_type %>):void {
+			this._<%= property.name %> = value;
+		}
+		<% end %>
+	}
+}

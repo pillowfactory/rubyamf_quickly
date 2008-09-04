@@ -1,0 +1,13 @@
+package <%= [package,'base'].join('.') %>
+{	
+  import <%= [helper_package, 'RubyAMF'].join('.') %>;
+	
+	public class RemoteBase
+	{
+	  protected function call(remoteAction, params:Object, resultHandler:Function, errorsHandler:Function, faultHandler:Function ):void {
+        RubyAMF.call(remoteController, remoteAction, params, resultHandler, faultHandler);
+      }
+		
+      protected function get remoteController():String { return null };
+	}
+}

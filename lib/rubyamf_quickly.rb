@@ -7,11 +7,15 @@ module RubyAMF
       # DESIGN TIME
       mattr_accessor :relative_flex_root
       mattr_accessor :action_script_package
-      mattr_accessor :ignore_classes
+      mattr_accessor :relative_model_package
+      mattr_accessor :relative_controller_package
+      mattr_accessor :ignore_class_names
       
-      @@relative_flex_root = 'app/flex/src'
+      @@relative_flex_root = 'app/flex'
       @@action_script_package = nil
-      @@ignore_classes = []
+      @@relative_model_package = 'models'
+      @@relative_controller_package = 'remoting'
+      @@ignore_class_names = []
 
       # RUNTIME
       mattr_accessor :convert_unhandled_exceptions
@@ -32,6 +36,8 @@ module RubyAMF
       
       # Convert any unhandled exception to an AMF FaultObject so it triggers a FaultEvent
       def amf_exception_handler(ex)
+        RAILS_DEFAULT_LOGGER.error exception.message
+        RAILS_DEFAULT_LOGGER.error exception.backtrace.join( "\n" )
         render :amf => FaultObject.new(ex.to_s) if is_amf
       end
     end
