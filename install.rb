@@ -29,7 +29,7 @@ begin
 
   #=> Where do you want to generate ActionScript classes?  
   # Defaults to Peter Armstrong's suggested RAILS_ROOT/app/flex
-  # RubyAMF::Quickly::Config.relative_flex_root = 'app/flex'
+  # RubyAMF::Quickly::Config.relative_flex_root = 'app/flex/src'
   # RubyAMF::Quickly::Config.relative_model_package = 'models'
   # RubyAMF::Quickly::Config.relative_controller_package = 'remoting'
 

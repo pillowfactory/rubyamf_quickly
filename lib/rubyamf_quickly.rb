@@ -11,7 +11,7 @@ module RubyAMF
       mattr_accessor :relative_controller_package
       mattr_accessor :ignore_class_names
       
-      @@relative_flex_root = 'app/flex'
+      @@relative_flex_root = 'app/flex/src'
       @@action_script_package = nil
       @@relative_model_package = 'models'
       @@relative_controller_package = 'remoting'
