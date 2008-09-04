@@ -27,7 +27,7 @@ package <%= as3_class.base_package %>
 		}
 		
 		/**
-		 * Create a new, duplicate instance of this <%= as3_class.name.downcase %>; copying all properties to the new instance by reference.
+		 * Create a new, duplicate instance of this <%= as3_class.base_name %>; copying all properties to the new instance by reference.
 		 */
 		public function clone():<%= as3_class.base_name %> {
 			var cloned:<%= as3_class.base_name %> = new (getDefinitionByName(getQualifiedClassName(this) as <%= as3_class.base_name %>);
@@ -38,7 +38,7 @@ package <%= as3_class.base_package %>
 		}
 		
 		/**
-		 * Test this <%= as3_class.name.downcase %>'s property values against another object determine equality
+		 * Test this <%= as3_class.base_name %>'s property values against another object determine equality
 		 */
 		public function equal( obj:Object ):Boolean {
 			return obj != null && obj is <%= as3_class.base_name %> <% as3_class.properties.each do |property| unless property.accessor.eql? 'id' %>
@@ -46,7 +46,7 @@ package <%= as3_class.base_package %>
 		}
 		
 		/**
-		 * Assign the values of another <%= as3_class.name.downcase %> to this <%= as3_class.name.downcase %>.
+		 * Assign the values of another <%= as3_class.base_name %> to this <%= as3_class.base_name %>.
 		 */
 		public function merge( obj:<%= as3_class.base_name %> ):void { <% as3_class.properties.each do |property| unless property.accessor.eql? 'id'%>
 			this.<%= property.accessor %> = obj.<%= property.accessor %>;<% end end %>
