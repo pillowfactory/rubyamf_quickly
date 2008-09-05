@@ -20,6 +20,10 @@ module RubyAMF::Quickly
       self.actions.sort!
     end
     
+    def base_name
+      return "#{self.name}Base"
+    end
+    
     def qualified_name
       [self.package, self.name].join('.')
     end

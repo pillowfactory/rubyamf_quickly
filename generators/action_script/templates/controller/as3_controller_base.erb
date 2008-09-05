@@ -6,9 +6,9 @@ package <%= as3_class.base_package %>
 {
 	import <%= "#{[base_class_package,'base.RemoteBase'].join('.')};" %>
 
-	public class <%= as3_class.name %>Base extends RemoteBase
+	public class <%= as3_class.base_name %> extends RemoteBase
 	{
-	    public function <%= as3_class.name %>Base() { /* do nothing */ }
+	    public function <%= as3_class.base_name %>() { /* do nothing */ }
 	  
 	    protected override function get remoteController():String {
 	      return '<%= as3_class.ruby_class.to_s %>';

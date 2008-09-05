@@ -9,7 +9,7 @@ package <%= as3_class.base_package %>
 	import <%= "#{helper_package}.Hash;" %>
 	
 	[Bindable]
-	public class <%= as3_class.name %>Base extends Base
+	public class <%= as3_class.base_name %> extends Base
 	{
 	  	<% as3_class.properties.each {|property| %>private var _<%= property.name %>:<%= property.static_type %><%= ['lock_version',"lockVersion"].include?( property.name ) ? ' = 0' : '' %>;
 	  	<% } %>
