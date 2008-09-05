@@ -8,20 +8,32 @@ NOTE:	The RubyAMF::Quickly plugin installation appends it's own configuration se
 	default RubyAMF settings.  All examples and following explanation are given using the RubyAMF::Quickly default configuration.
 
 RubyAMF::Quickly provides the following:
-
-	1.	ActionScript Model Generator
-		============================
-		The action_script_models generator creates ActionScript models from the project's ActiveRecord models.
+	1.  ActionScript Generator
+		======================
+		The action_script generator creates both ActionScript models from the project's ActiveRecord models AND ActionScript
+		remoting classes that correspond to the Rails controller classes.
 		
-		Given a Rails project with a single ActiveRecord model, Person.rb the following will be created from running
-		./script/generate action_script_models com.example.models
+		Given a Rails project with a single ActiveRecord model, Person.rb, and a single controller, PeopleController.rb, the following 		
+		ActionScript model classes will be created by running ./script/generate action_script org.pillowfactory
 		
-		RAILS_ROOT/app/flex/com/example/models/Person.as		=> Generated once. Add custom ActionScript model behavior here. Subclasses PersonBase.as
-		RAILS_ROOT/app/flex/com/example/models/base/PersonBase.as	=> Generated every time. Contains properties and toParams() method
-		RAILS_ROOT/app/flex/com/example/models/helpers/Errors.as	=> ActionScript implementation of the ActiveRecord Errors class
-		RAILS_ROOT/app/flex/com/example/models/helpers/Hash.as		=> ActionScript dynamic class with some Ruby Hash-like methods
-		RAILS_ROOT/app/flex/com/example/models/helpers/RubyAMF.as	=> Simple remoting helper for Rails controller/action invocation
-		
+		Model Classes
+		=============
+		RAILS_ROOT/app/flex/src/
+			org/pillowfactory/models/Person.as	=> Generated once.  Add custom model behavior/properties here.
+			org/pillowfactory/models/base/PersonBase.as	=> Regenerated. Contains properties and model helper methods.
+			org/pillowfactory/models/base/Base.as	=> Generated once. Superclass to all generated models.
+			org/pillowfactory/models/helpers/Errors.as	=> ActionScript implementation of the ActiveRecord Errors class.
+			org/pillowfactory/models/helpers/Hash.as	=> ActionScript dynamic class with Ruby Hash-like methods.
+			
+		Remoting Classes
+		================
+		RAILS_ROOT/app/flex/src/
+			org/pillowfactory/remoting/api/RemotePeople.as	=> Generated once. Add custom remote access methods here.
+			org/pillowfactory/remoting/api/base/RemotePeopleBase.as	=> Regenerated. Contains methods that correspond to PeopleController actions.
+			org/pillowfactory/remoting/api/base/RemoteBase.as	=> Generated once. Superclass for all Remote* classes.
+			org/pillowfactory/remoting/Remote.as	=> Generated every time.  Provides static access to all remoting class methods.
+			org/pillowfactory/remoting/helpers/RubyAMF.as => Simple remoting helper for Rails controller/action invocation.
+			
 	2.	Runtime Assistance
 		==================
 		By default, RubyAMF::Quickly adds a couple of helpers to the RubyAMF request cycle.
@@ -48,9 +60,9 @@ Given a Person.rb ActiveRecord class, a PeopleController#create Rails controller
 	myPerson.name = 'Foo';
 	myPerson.favoriteNumber = 7;
 	
-	RubyAMF.call('PeopleController', 'create', {person: myPerson.toParams()}, myPersonResultHandler, myPersonFaultHandler);
+	Remote.people.create({person: myPerson.toParams()}, myPersonResultHandler, myPersonFaultHandler)
 	
-This example uses the generated Person.as ActionScript class that corresponds to the ActiveRecord Person.rb with two database attributes: name and favorite_number.  The RubyAMF.call() method streamlines the definition and "caching" of Flex RemoteObjects.  The first parameter is the class name of the Rails controller we're targeting.  The second parameter is the controller action to invoke.  The third parameter is an anonymous object that serves as the hash-like "wrapper" that the parameters will be sent in.  This is the equivalent of a standard HTML form input names of person[name] and person[favorite_number].  You'll want to note the use of myPerson.toParams() when constructing the request "hash."  toParams() is defined on the generated PersonBase.as class that returns another anonymous object with the corresponding attributes and values.  The request "hash" could have also been defined without using the toParams() method as {person: {name: 'foo', favoriteNumber: 7}}, but the toParams() method provides additional functionality.  toParams() also accepts an array of properties to exclude.  For example, {person: myPerson.toParams('name')} would not include the name property and value in the request.
+This example uses the generated Person.as ActionScript class that corresponds to the ActiveRecord Person.rb with two database attributes: name and favorite_number.  The Remote.people.create method streamlines the definition and "caching" of Flex RemoteObjects.  The Remote property, "people" corresponds to the name of the Rails controller we're targeting; PeopleController.  The "create" method of "people" is the controller action to invoke.  Remote remoting action methods accept three parameters.  The first parameter is an anonymous object that serves as the hash-like "wrapper" that the parameters will be sent in.  This is the equivalent of a standard HTML form input names of person[name] and person[favorite_number].  You'll want to note the use of myPerson.toParams() when constructing the request "hash."  toParams() is defined on the generated PersonBase.as class that returns another anonymous object with the corresponding attributes and values.  The request "hash" could have also been defined without using the toParams() method as {person: {name: 'foo', favoriteNumber: 7}}, but the toParams() method provides additional functionality.  toParams() also accepts an array of properties to exclude.  For example, {person: myPerson.toParams('name')} would not include the name property and value in the request. The second and third parameters are the result and fault handlers to be called upon completion of the remoting request.
 
 
 More Documentation
