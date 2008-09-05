@@ -4,17 +4,18 @@ RubyAMF::Quickly
 The RubyAMF::Quickly plugin is intended to jump start any Flex on Rails project using RubyAMF.  
 
 NOTE:	The RubyAMF::Quickly plugin installation appends it's own configuration settings to the config/rubyamf_config.rb file.
-	The plugin's configuration defaults it's settings for the most natural Rails and Flex development as well as overrides some of the 
-	default RubyAMF settings.  All examples and following explanation are given using the RubyAMF::Quickly default configuration.
+	The plugin's configuration defaults it's settings for the most natural Rails and Flex development as well as overrides
+	some of the default RubyAMF settings.  
+	All examples and following explanation are given using the RubyAMF::Quickly default configuration.
 
 RubyAMF::Quickly provides the following:
 	1.  ActionScript Generator
 		======================
-		The action_script generator creates both ActionScript models from the project's ActiveRecord models AND ActionScript
+		The action_script generator creates both ActionScript models from the project's ActiveRecord models AND ActionScript 
 		remoting classes that correspond to the Rails controller classes.
 		
-		Given a Rails project with a single ActiveRecord model, Person.rb, and a single controller, PeopleController.rb, the following 		
-		ActionScript model classes will be created by running ./script/generate action_script org.pillowfactory
+		Given a Rails project with a single ActiveRecord model, Person.rb, and a single controller, PeopleController.rb, the
+		following ActionScript model classes will be created by running ./script/generate action_script org.pillowfactory
 		
 		Model Classes
 		=============
@@ -39,8 +40,8 @@ RubyAMF::Quickly provides the following:
 		By default, RubyAMF::Quickly adds a couple of helpers to the RubyAMF request cycle.
 				
 		- Parameter Filtering - This before_filter merges any remoting request parameters into the standard controller params hash.
-		- Default Exception Handling -	Using the Rails 2 rescue_from method, any unhandled Exceptions will be converted to a RubyAMF
-						FaultObject that will trigger an ActionScript FaultEvent.
+		- Default Exception Handling -	Using the Rails 2 rescue_from method, any unhandled Exceptions will be converted to a 
+		RubyAMF FaultObject that will trigger an ActionScript FaultEvent.
 		
 
 Quickly Concepts
