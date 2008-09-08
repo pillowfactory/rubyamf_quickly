@@ -29,8 +29,8 @@ package <%= as3_class.base_package %>
 		/**
 		 * Create a new, duplicate instance of this <%= as3_class.base_name %>; copying all properties to the new instance by reference.
 		 */
-		public function clone():<%= as3_class.base_name %> {
-			var cloned:<%= as3_class.base_name %> = new (getDefinitionByName(getQualifiedClassName(this) as <%= as3_class.base_name %>);
+		protected function cloneBase():<%= as3_class.base_name %> {
+			var cloned:<%= as3_class.base_name %> = new (getDefinitionByName(getQualifiedClassName(this))) as <%= as3_class.base_name %>;
 			<% as3_class.properties.each do |property| unless property.accessor.eql? 'id' %>
 			cloned.<%= property.accessor %> = this.<%= property.accessor %>;<% end end %>
 

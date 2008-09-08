@@ -7,12 +7,12 @@ package <%= as3_class.package %>
 	public class <%= as3_class.name %> extends <%= as3_superclass_name %>
 	{
 		
-      /**
-       * Create a new, duplicate instance of this <%= as3_class.name %>
-       */ 
-      public override function clone():<%= as3_class.name %> {
-  		  return super.clone() as <%= as3_class.name %>;
-      }
+    /**
+     * Create a new, duplicate instance of this <%= as3_class.name %>
+     */ 
+    public function clone():<%= as3_class.name %> {
+		  return super.cloneBase() as <%= as3_class.name %>;
+    }
 		
 	}
 }
