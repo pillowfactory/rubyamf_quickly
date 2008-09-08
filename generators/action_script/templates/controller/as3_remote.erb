@@ -6,7 +6,6 @@ package <%= package %>
 	{<% controllers.each do |controller| %>
         private static const <%= controller.const_name %>:<%= controller.name %> = new <%= controller.name %>();<% end %>
 	  
-		private function Remote() { /* do nothing */ }
 		<% controllers.each do |controller| %>
 		public static function get <%= "#{controller.simple_name[0..0].downcase}#{controller.simple_name[1..-1]}" %>():<%= controller.name %> { return <%= controller.const_name %>; }<% end %>
 		  
