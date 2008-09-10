@@ -1,6 +1,6 @@
 RubyAMF::Quickly
 ================
-
+ 
 The RubyAMF::Quickly plugin is intended to jump start any Flex on Rails project using RubyAMF.  
 
 NOTE:	The RubyAMF::Quickly plugin installation appends it's own configuration settings to the config/rubyamf_config.rb file.
