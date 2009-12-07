@@ -1,4 +1,4 @@
-require File.join('app', 'controllers', 'application')
+require File.join('app', 'controllers', 'application_controller')
 require 'rubyamf_quickly'
 
 # Include the filter methods
