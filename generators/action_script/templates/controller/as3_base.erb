@@ -4,7 +4,7 @@ package <%= [package,'base'].join('.') %>
 	
 	public class RemoteBase
 	{
-	  protected function call(remoteAction, params:Object, resultHandler:Function, errorsHandler:Function, faultHandler:Function ):void {
+	  protected function call(remoteAction, params:Object, resultHandler:Function, faultHandler:Function ):void {
         RubyAMF.call(remoteController, remoteAction, params, resultHandler, faultHandler);
       }
 		
