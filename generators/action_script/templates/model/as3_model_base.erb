@@ -7,6 +7,9 @@ package <%= as3_class.base_package %>
 	import <%= "#{[base_class_package,'base.Base'].join('.')};" %>
 	import <%= "#{as3_class.package}.#{as3_class.name};" %>
 	import <%= "#{helper_package}.Hash;" %>
+
+  import flash.utils.getDefinitionByName;
+  import flash.utils.getQualifiedClassName;
 	
 	[Bindable]
 	public class <%= as3_class.base_name %> extends Base
